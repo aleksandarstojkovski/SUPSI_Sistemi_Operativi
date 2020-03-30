@@ -85,4 +85,5 @@ void test_tqueue_offset_at(){
         printf("ERROR: test 2 of test_tqueue_offset_at() failed.\n");
         return;
     }
+    printf( "PASSED: test_tqueue_offset_at().\n");
 }
