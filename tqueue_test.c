@@ -22,6 +22,12 @@ void test_tqueue_size(){
         printf("ERROR: test 1 of test_tqueue_size() failed.\n");
         return;
     }
+    tqueue_pop(&queue);
+    // size must be 5
+    if (tqueue_size(queue) != 4){
+        printf("ERROR: test 2 of test_tqueue_size() failed.\n");
+        return;
+    }
     printf( "PASSED: test_tqueue_size().\n");
 }
 
@@ -83,6 +89,11 @@ void test_tqueue_offset_at(){
     }
     if (((myTestStruct*)tqueue_get_data(tqueue_at_offset(queue,1)))->number != 2){
         printf("ERROR: test 2 of test_tqueue_offset_at() failed.\n");
+        return;
+    }
+    tqueue_pop(&queue);
+    if (((myTestStruct*)tqueue_get_data(tqueue_at_offset(queue,0)))->number != 2){
+        printf("ERROR: test 3 of test_tqueue_offset_at() failed.\n");
         return;
     }
     printf( "PASSED: test_tqueue_offset_at().\n");
