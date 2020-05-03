@@ -7,6 +7,8 @@
 #include <stddef.h>
 #include "tqueue.h"
 
+int pos;
+
 typedef struct TQueueNode {
     struct TQueueNode* next;
     void* data;
@@ -16,9 +18,11 @@ typedef struct TQueueNode {
 // typedef struct TQueueNode *TQueue;
 
 TQueueNode * tail_of_queue(TQueue* q){
+    pos=0;
     TQueueNode * previous = (*q);
     TQueueNode * current = (*q)->next;
     while (current != *q){
+        pos++;
         current = current->next;
         previous = previous->next;
     }
@@ -30,8 +34,10 @@ unsigned long int tqueue_enqueue(TQueue* q, void* data){
         // q == **TQueueNode
         // *q == *TQueueNode
 
+        pos = 0;
+
         if (q == NULL){
-            return -1;
+            return pos;
         }
 
         if (*q == NULL){
@@ -46,8 +52,9 @@ unsigned long int tqueue_enqueue(TQueue* q, void* data){
             tail->next = malloc(sizeof(TQueueNode));
             tail->next->data = data;
             tail->next->next = head;
+            pos++;
         }
-
+        return pos;
 }
 
 unsigned long int tqueue_size(TQueue q){
@@ -55,7 +62,7 @@ unsigned long int tqueue_size(TQueue q){
     // TQueue = *TQueueNode
 
     if (q == NULL){
-        return -1;
+        return 0;
     }
 
     int size = 1;
@@ -70,31 +77,36 @@ unsigned long int tqueue_size(TQueue q){
 
 void* tqueue_pop(TQueue* q){
 
-    // q == **TQueueNode, *q == *TQueueNode
-
-    if (q == NULL || *q == NULL){
+    if(q == NULL)
         return NULL;
-    }
 
-    TQueueNode * head = *q;
-    TQueueNode * tail = tail_of_queue(q);
-
-    void * data = NULL;
-
-    if (head == tail){
-        *q = NULL;
-    } else {
-        data = (*q)->data;
-        (*q) = (*q)->next;
-        tail->next = (*q);
+    TQueueNode* head = (*q);
+    void* data = NULL;
+    if(head != NULL) {
+        data = head->data;
+        if(head == head->next) {
+            // single node in queue
+            *q = NULL;
+        } else {
+            TQueueNode *current = head;
+            // search previous node
+            while(current->next != head) {
+                current = current->next;
+            }
+            // bypass head
+            current->next = head->next;
+            *q = current->next;
+        }
         free(head);
     }
-
     return data;
 }
 
 /* Returns the data on the first node of the given list */
 void* tqueue_get_data(TQueue q){
+    if(q == NULL)
+        return NULL;
+
     return q->data;
 }
 

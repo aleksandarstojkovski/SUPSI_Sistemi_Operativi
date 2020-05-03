@@ -48,7 +48,7 @@ void test_tqueue_push_pop(){
     // remove one item
     tqueue_pop(&queue);
     // 1 - 1 = 0 --> queue is NULL, size must be -1
-    if (tqueue_size(queue) != -1){
+    if (tqueue_size(queue) != 0){
         printf("ERROR: test 2 of test_pop() failed.\n");
         return;
     }
