@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-#include "tqueue.h"
+#include "../tqueue.h"
 
 typedef struct {
     int number;

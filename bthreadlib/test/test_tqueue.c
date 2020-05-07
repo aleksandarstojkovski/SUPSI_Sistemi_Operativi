@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-#include "tqueue.h"
+#include "../tqueue.h"
 
 typedef struct {
     char str[10];
@@ -67,5 +67,7 @@ int test_data(data_t data[], long int data_sz) {
     }
 
     fprintf(stdout, ": PASSED\n");
+
     return 0;
+
 }

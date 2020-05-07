@@ -2,9 +2,9 @@
 #include "bthread.h"
 #include "bthread_private.h"
 #include "tqueue.h"
-#include "tqueue_test.h"
-#include "test_bthread.h"
-#include "test_tqueue.h"
+#include "test/tqueue_test.h"
+#include "test/test_bthread.h"
+#include "test/test_tqueue.h"
 
 
 int main() {

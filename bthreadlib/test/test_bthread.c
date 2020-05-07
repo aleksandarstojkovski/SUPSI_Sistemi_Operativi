@@ -2,7 +2,7 @@
 // Created by alesto on 28.03.2020.
 //
 #include <stdio.h>
-#include "bthread.h"
+#include "../bthread.h"
 #define THREADS 3
 
 void* my_routine(void* param) {
